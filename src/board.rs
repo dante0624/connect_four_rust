@@ -77,7 +77,7 @@ mod testing_constants {
 	   1 0 0 1 0 0 0
 	   1 1 1 0 1 1 0
 	*/
-	pub(crate) const DRAWN: Position = Position { current_player_stones: 0xD0A955454A87, both_players_mask: 0xFDFBF7EFDFBF, moves_played: 42 };
+	pub(crate) const DRAWN: Position = Position { current_player_stones: 0xE0A955454A87, both_players_mask: 0xFDFBF7EFDFBF, moves_played: 42 };
 
 	/* Connect 20 (just won in middle column, the numbers switch. So the 0's won):
 	   1 0 1 * 1 0 *
