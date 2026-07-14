@@ -49,16 +49,6 @@ pub(crate) fn count_ones_in_bitmap(mut bitmap: Bitmap) -> u8 {
 mod tests {
     use super::*;
 
-    // TODO: Move this one over to transposition table UTs
-    #[test]
-    fn test_transposition_table_can_hold_bitmap() {
-        // This needs to be true for the Chinese Remainder Theorem to hold in the transposition table
-        // We really only store 31 bits of the key
-        // We index based on numEntries, which is roughly 2^23
-        // So to make the Chinese Remainder Theorem hold, the true key size must be <= (31 + 23 = 54 bits)
-        assert!(BITMAP_ROW_WIDTH * BITMAP_COLUMN_HEIGHT <= 54);
-    }
-
     #[test]
     fn test_compute_playable_column_mask() {
         assert_eq!(0x3F, compute_playable_column_mask(0));

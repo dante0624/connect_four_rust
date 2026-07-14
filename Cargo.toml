@@ -3,4 +3,9 @@ name = "connect_four_rust"
 version = "0.1.0"
 edition = "2024"
 
+# TODO: Split the library and application stuff into separate workspaces
+# Then make thiserror a library dependency but anyhow an application dependency
 [dependencies]
+thiserror = "2"
+anyhow = "1.0"
+
