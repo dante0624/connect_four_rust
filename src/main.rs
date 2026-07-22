@@ -11,9 +11,11 @@ use crate::{board::PlayColumnError, live_evaluation::Solver};
 fn main() -> Result<()>{
     let mut solver = Solver::new();
 
+    println!("columns,score,nodes,time_us");
+
     for line in std::io::stdin().lines() {
         let line = line?;
-        let (position, expected_eval) = parse_line(&line)?;
+        let (position, columns, expected_eval) = parse_line(&line)?;
 
         let start = SystemTime::now();
         let actual_eval = solver.solve(position);
@@ -29,7 +31,7 @@ fn main() -> Result<()>{
             .with_context(|| format!("Got negative time duration after evaluating {}", line))?
             .as_micros();
 
-        println!("{} {} {}", line, solver.node_count, duration_micros);
+        println!("{},{},{},{}", columns, actual_eval, solver.node_count, duration_micros);
 
         solver.reset();
     }
@@ -38,7 +40,7 @@ fn main() -> Result<()>{
 }
 
 
-fn parse_line(line: &str) -> Result<(Position, i8)> {
+fn parse_line(line: &str) -> Result<(Position, &str, i8)> {
     let mut position = Position::new_blank_game();
 
     let (columns, eval) = line.split_once(' ')
@@ -56,5 +58,5 @@ fn parse_line(line: &str) -> Result<(Position, i8)> {
 
     let expected_eval = eval.parse::<i8>()?;
 
-    Ok((position, expected_eval))
+    Ok((position, columns, expected_eval))
 }
